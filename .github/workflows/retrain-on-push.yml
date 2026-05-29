@@ -53,60 +53,60 @@ jobs:
           pip install dvc[http] scipy
 
       # Step 5: Configure DVC with DagsHub remote
-      - name: Configure DVC remote credentials
-        env:
-          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
-        run: |
-          dvc remote modify origin --local auth basic
-          dvc remote modify origin --local user $DAGSHUB_USERNAME
-          dvc remote modify origin --local password $DAGSHUB_TOKEN
+      #- name: Configure DVC remote credentials
+      #  env:
+      #    DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+      #    DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+      # run: |
+      #    dvc remote modify origin --local auth basic
+      #    dvc remote modify origin --local user $DAGSHUB_USERNAME
+      #   dvc remote modify origin --local password $DAGSHUB_TOKEN
 
       # Step 6: Pull existing data and model artefacts from DVC
-      - name: Pull data from DVC remote
-        run: dvc pull || echo "No existing artefacts to pull"
+      #- name: Pull data from DVC remote
+      #  run: dvc pull || echo "No existing artefacts to pull"
 
       # Step 7: Preprocess any new data
-      - name: Preprocess new data
-        run: python src/preprocess_new_data.py
+      #- name: Preprocess new data
+      #  run: python src/preprocess_new_data.py
 
       # Step 8: Run drift detection and monitoring 
-      - name: Run drift detection
-        run: python src/monitor.py
+     #- name: Run drift detection
+      #  run: python src/monitor.py
 
       # Step 9: Retrain model via DVC pipeline 
-      - name: Retrain model (DVC repro)
-        run: |
-          if [ "${{ github.event.inputs.force_retrain }}" == "true" ]; then
-            echo "Force retrain enabled — running dvc repro --force"
-            dvc repro --force
-          else
-            dvc repro
-          fi
+      #- name: Retrain model (DVC repro)
+      #  run: |
+      #    if [ "${{ github.event.inputs.force_retrain }}" == "true" ]; then
+       #     echo "Force retrain enabled — running dvc repro --force"
+      #      dvc repro --force
+      #    else
+      #      dvc repro
+      #    fi
 
       # Step 10: Push updated artefacts to DVC remote 
-      - name: Push artefacts to DVC remote
-        env:
-          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
-        run: dvc push
+      #- name: Push artefacts to DVC remote
+      #  env:
+      #    DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+      #    DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+      #  run: dvc push
 
       # Step 11: Commit updated metrics and monitoring reports 
-      - name: Commit updated metrics and reports
-        run: |
-          git config --local user.email "github-actions@github.com"
-          git config --local user.name "GitHub Actions [Bot]"
-          git add artifacts/metrics/ reports/ monitoring/ artifacts/metadata/ || true
-          git diff --staged --quiet || git commit -m "chore(metrics): update model metrics and monitoring reports after retrain [skip ci]"
-          git push || echo "Nothing new to push"
+      #- name: Commit updated metrics and reports
+      #  run: |
+      #    git config --local user.email "github-actions@github.com"
+      #    git config --local user.name "GitHub Actions [Bot]"
+      #    git add artifacts/metrics/ reports/ monitoring/ artifacts/metadata/ || true
+       #   git diff --staged --quiet || git commit -m "chore(metrics): update model metrics and monitoring reports after retrain [skip ci]"
+      #    git push || echo "Nothing new to push"
 
       # Step 12: Upload artefacts to GitHub Actions 
-      - name: Upload model artefacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: model-results-${{ github.run_number }}
-          path: |
-            artifacts/models/
-            artifacts/metrics/
-            reports/drift_report.json
-            reports/performance_report.html
+     # - name: Upload model artefacts
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: model-results-${{ github.run_number }}
+      #    path: |
+      #      artifacts/models/
+      #      artifacts/metrics/
+      #      reports/drift_report.json
+      #      reports/performance_report.html
