@@ -3,5 +3,8 @@ numpy
 matplotlib
 pandas
 seaborn
+scikit-learn
+dvc
+dvc-gdrive
+dvclive
 keras
-category_encoders 
