@@ -19,7 +19,7 @@ on:
       force_retrain:
         description: 'Force retraining even without drift detected'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
