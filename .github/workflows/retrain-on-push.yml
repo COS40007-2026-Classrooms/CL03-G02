@@ -1,0 +1,112 @@
+name: Retrain ML Model - Tetouan Power Forecasting
+
+on:
+  # Trigger 1: Automated on data push
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'train/**'
+      - 'test/**'
+
+  # Trigger 2: Scheduled (every Sunday at midnight)
+  schedule:
+    - cron: '0 0 * * 0'
+
+  # Trigger 3: Manual trigger with optional force retrain
+  workflow_dispatch:
+    inputs:
+      force_retrain:
+        description: 'Force retraining even without drift detected'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+      #  Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Step 3: Cache pip to speed up runs
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # Step 4: Install project dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install dvc[http] scipy
+
+      # Step 5: Configure DVC with DagsHub remote
+      - name: Configure DVC remote credentials
+        env:
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          dvc remote modify origin --local auth basic
+          dvc remote modify origin --local user $DAGSHUB_USERNAME
+          dvc remote modify origin --local password $DAGSHUB_TOKEN
+
+      # Step 6: Pull existing data and model artefacts from DVC
+      - name: Pull data from DVC remote
+        run: dvc pull || echo "No existing artefacts to pull"
+
+      # Step 7: Preprocess any new data
+      - name: Preprocess new data
+        run: python src/preprocess_new_data.py
+
+      # Step 8: Run drift detection and monitoring 
+      - name: Run drift detection
+        run: python src/monitor.py
+
+      # Step 9: Retrain model via DVC pipeline 
+      - name: Retrain model (DVC repro)
+        run: |
+          if [ "${{ github.event.inputs.force_retrain }}" == "true" ]; then
+            echo "Force retrain enabled — running dvc repro --force"
+            dvc repro --force
+          else
+            dvc repro
+          fi
+
+      # Step 10: Push updated artefacts to DVC remote 
+      - name: Push artefacts to DVC remote
+        env:
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: dvc push
+
+      # Step 11: Commit updated metrics and monitoring reports 
+      - name: Commit updated metrics and reports
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions [Bot]"
+          git add artifacts/metrics/ reports/ monitoring/ artifacts/metadata/ || true
+          git diff --staged --quiet || git commit -m "chore(metrics): update model metrics and monitoring reports after retrain [skip ci]"
+          git push || echo "Nothing new to push"
+
+      # Step 12: Upload artefacts to GitHub Actions 
+      - name: Upload model artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-results-${{ github.run_number }}
+          path: |
+            artifacts/models/
+            artifacts/metrics/
+            reports/drift_report.json
+            reports/performance_report.html
