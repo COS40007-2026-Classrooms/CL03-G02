@@ -1,14 +1,10 @@
 {
   "timestamp": "2026-05-31T14:34:13.365310",
-  "n_samples": 999,
-  "drift_detected": true,
   "drifted_features": [
     "Temperature",
     "Humidity",
     "Wind Speed",
     "general diffuse flows",
     "diffuse flows"
-  ],
-  "mae": 123.63000355105089,
-  "r2": 0.9987381500811968
+  ]
 }
