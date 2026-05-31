@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-31T16:01:56.688710",
+  "timestamp": "2026-05-31T16:27:21.967744",
   "n_samples": 999,
   "drift_detected": true,
   "drifted_features": [
@@ -12,51 +12,51 @@
   ],
   "drift_detail": {
     "Temperature": {
-      "ks_statistic": 0.38661860917126734,
-      "p_value": 1.121611767541086e-131,
+      "ks_statistic": 0.3773533404824486,
+      "p_value": 2.287364260075522e-125,
       "drift": true
     },
     "Humidity": {
-      "ks_statistic": 0.09637457153862883,
-      "p_value": 2.4701123283583372e-08,
+      "ks_statistic": 0.09406496646817142,
+      "p_value": 5.749183250533774e-08,
       "drift": true
     },
     "Wind Speed": {
-      "ks_statistic": 0.14624303070244038,
-      "p_value": 1.1571466595668017e-18,
+      "ks_statistic": 0.14273833397759894,
+      "p_value": 8.1704848066136e-18,
       "drift": true
     },
     "general diffuse flows": {
-      "ks_statistic": 0.19519401427627642,
-      "p_value": 5.081108195913917e-33,
+      "ks_statistic": 0.19051621308973898,
+      "p_value": 1.695298128369292e-31,
       "drift": true
     },
     "diffuse flows": {
-      "ks_statistic": 0.2211664315038857,
-      "p_value": 2.2844288906101528e-42,
+      "ks_statistic": 0.2158662044475027,
+      "p_value": 2.108541397640555e-40,
       "drift": true
     },
     "hour": {
-      "ks_statistic": 0.003705723567104302,
+      "ks_statistic": 0.0036169163454102815,
       "p_value": 1.0,
       "drift": false
     },
     "month": {
-      "ks_statistic": 0.9017868115122767,
+      "ks_statistic": 0.8801755985222857,
       "p_value": 0.0,
       "drift": true
     },
     "day_of_week": {
-      "ks_statistic": 0.003936667023156537,
+      "ks_statistic": 0.0038423252691831555,
       "p_value": 1.0,
       "drift": false
     },
     "is_weekend": {
-      "ks_statistic": 0.0016119543241228662,
+      "ks_statistic": 0.0015733240317034047,
       "p_value": 1.0,
       "drift": false
     }
   },
-  "mae": 10.966237964569688,
-  "r2": 0.9999850007165022
+  "mae": 4.146852389910288,
+  "r2": 0.9999964907879993
 }
