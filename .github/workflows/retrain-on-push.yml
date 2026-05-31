@@ -25,6 +25,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Configure git identity
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions [Bot]"
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -85,8 +90,6 @@ jobs:
 
       - name: Commit updated metrics and reports
         run: |
-          git config --local user.email "github-actions@github.com"
-          git config --local user.name "GitHub Actions [Bot]"
           git add artifacts/metrics/ monitoring/ dvc.lock train/train.csv.dvc || true
           git diff --staged --quiet || git commit -m "update metrics and monitoring reports [skip ci]"
           git push || echo "Nothing to push"
