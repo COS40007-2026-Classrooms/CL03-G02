@@ -90,6 +90,9 @@ jobs:
           git diff --staged --quiet || git commit -m "update metrics and monitoring reports [skip ci]"
           git push || echo "Nothing to push"
 
+      - name: Generate HTML reports
+        run: python3 src/generate_reports.py
+
       - name: Upload artefacts
         uses: actions/upload-artifact@v4
         with:
