@@ -93,7 +93,9 @@ jobs:
           git add artifacts/metrics/ monitoring/ dvc.lock train/train.csv.dvc || true
           git diff --staged --quiet || git commit -m "update metrics and monitoring reports [skip ci]"
           git push origin main || echo "Nothing to push to origin"
+          git stash || true
           git pull --rebase https://${{ secrets.DAGSHUB_USERNAME }}:${{ secrets.DAGSHUB_TOKEN }}@dagshub.com/kaibroomfield314/CL03_G02.git main || true
+          git stash pop || true
           git push https://${{ secrets.DAGSHUB_USERNAME }}:${{ secrets.DAGSHUB_TOKEN }}@dagshub.com/kaibroomfield314/CL03_G02.git main || echo "Nothing to push to DagHub"
 
       - name: Generate HTML reports
