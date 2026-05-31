@@ -1,0 +1,54 @@
+stages:
+  train:
+    cmd: python src/model.py
+    deps:
+      - src/model.py
+      - train/train.csv
+      - test/test.csv
+      - val/val.csv
+      - params.yaml
+    outs:
+      - models/model.keras
+      - artifacts/
+    metrics:
+      - metrics.json:
+          cache: false
+    params:
+      - params.yaml
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.keras
+      - artifacts/X_test_cnn.npy
+      - artifacts/y_test.npy
+      - artifacts/training_history.json
+      - artifacts/feature_columns.json
+      - test/test.csv
+      - params.yaml
+    metrics:
+      - metrics.json:
+          cache: false
+
+  monitor:
+    cmd: python src/monitor.py
+    deps:
+      - src/monitor.py
+      - models/model.keras
+      - artifacts/data/
+    outs:
+      - retrain_needed.txt:
+          cache: false
+      - drift_status.txt:
+          cache: false
+
+params:
+  - params.yaml
+
+metrics:
+  - metrics.json
+
+plots:
+  - dvclive/plots/metrics:
+      x: step

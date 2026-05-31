@@ -9,3 +9,5 @@ dvc-gdrive
 dvclive
 keras
 joblib
+scipy
+pyyaml
