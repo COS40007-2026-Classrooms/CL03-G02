@@ -7,32 +7,31 @@
     table { border-collapse: collapse; margin-bottom: 20px; }
     th, td { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
     th { background: #eee; }
-    .alert { color: red; }
   </style>
 </head>
 <body>
   <h2>Monitoring Dashboard</h2>
-  <p>Timestamp: 2026-05-31T13:45:32 &nbsp;|&nbsp; Samples: 999</p>
+  <p>Timestamp: 2026-05-31T14:30:24.356748 &nbsp;|&nbsp; Samples: 999</p>
 
   <h3>Drift Status</h3>
-  <p class="alert">Drift detected: YES</p>
+  <p style="color:red">Drift detected: YES</p>
   <p>Drifted features: Temperature, Humidity, Wind Speed, general diffuse flows, diffuse flows</p>
 
   <h3>Feature Drift (KS Test)</h3>
   <table>
     <tr><th>Feature</th><th>KS Statistic</th><th>p-value</th><th>Drift</th></tr>
-    <tr><td>Temperature</td><td>0.4287</td><td>6.42e-163</td><td class="alert">Yes</td></tr>
-    <tr><td>Humidity</td><td>0.1069</td><td>3.94e-10</td><td class="alert">Yes</td></tr>
-    <tr><td>Wind Speed</td><td>0.1622</td><td>7.96e-23</td><td class="alert">Yes</td></tr>
-    <tr><td>general diffuse flows</td><td>0.2165</td><td>1.69e-40</td><td class="alert">Yes</td></tr>
-    <tr><td>diffuse flows</td><td>0.2453</td><td>5.06e-52</td><td class="alert">Yes</td></tr>
+    <tr><td>Temperature</td><td>0.4066</td><td>5.09e-146</td><td style='color:red'>Yes</td></tr>
+    <tr><td>Humidity</td><td>0.1014</td><td>3.66e-09</td><td style='color:red'>Yes</td></tr>
+    <tr><td>Wind Speed</td><td>0.1538</td><td>1.39e-20</td><td style='color:red'>Yes</td></tr>
+    <tr><td>general diffuse flows</td><td>0.2053</td><td>1.82e-36</td><td style='color:red'>Yes</td></tr>
+    <tr><td>diffuse flows</td><td>0.2326</td><td>8.13e-47</td><td style='color:red'>Yes</td></tr>
   </table>
 
   <h3>Performance on New Data</h3>
   <table>
     <tr><th>Metric</th><th>Value</th></tr>
-    <tr><td>MAE</td><td>4720.46</td></tr>
-    <tr><td>R2</td><td>-0.0480</td></tr>
+    <tr><td>MAE</td><td>318.9348</td></tr>
+    <tr><td>R2</td><td>0.9926</td></tr>
   </table>
 </body>
 </html>
