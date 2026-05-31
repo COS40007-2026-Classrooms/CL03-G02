@@ -59,7 +59,7 @@ np.save('artifacts/data/y_train.npy', y_train)
 
 log.info("Training Random Forest and Decision Tree models")
 
-rf = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
+rf = RandomForestRegressor(n_estimators=100, max_depth=20, random_state=42, n_jobs=-1)
 rf.fit(X_train_scaled, y_train)
 
 dt = DecisionTreeRegressor(max_depth=10, random_state=42)

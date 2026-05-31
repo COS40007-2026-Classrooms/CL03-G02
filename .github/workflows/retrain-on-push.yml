@@ -69,7 +69,7 @@ jobs:
           else
             dvc repro train evaluate
           fi
-          dvc exp save --no-cache -n "ci-retrain-$(date +%Y%m%d-%H%M%S)"
+          dvc exp save -n "ci-retrain-$(date +%Y%m%d-%H%M%S)"
 
       - name: Run drift detection
         run: |

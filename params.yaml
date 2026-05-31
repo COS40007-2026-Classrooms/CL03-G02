@@ -6,7 +6,8 @@ data:
 
 model:
   n_estimators: 100
-  max_depth: 10
+  rf_max_depth: 20
+  dt_max_depth: 10
   random_state: 42
 
 evaluate:
