@@ -26,6 +26,16 @@ DRIFT_P_THRESHOLD = 0.05
 TARGET_COL = 'Zone 1 Power Consumption'
 
 
+def _add_time_features(df):
+    dt = pd.to_datetime(df['DateTime'], dayfirst=False)
+    df = df.copy()
+    df['hour'] = dt.dt.hour
+    df['month'] = dt.dt.month
+    df['day_of_week'] = dt.dt.dayofweek
+    df['is_weekend'] = (dt.dt.dayofweek >= 5).astype(int)
+    return df
+
+
 def detect_drift(reference: np.ndarray, current: np.ndarray, feature_names: list) -> dict:
     results = {}
     for i, name in enumerate(feature_names):
@@ -39,6 +49,8 @@ def detect_drift(reference: np.ndarray, current: np.ndarray, feature_names: list
 
 
 def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
+    now = datetime.utcnow()
+
     with open('artifacts/preprocessing/feature_columns.json') as f:
         feature_cols = json.load(f)
 
@@ -47,7 +59,7 @@ def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
     X_train = np.load('artifacts/data/X_train.npy')
 
     log.info("Loading new data from %s", new_data_path)
-    new_df = pd.read_csv(new_data_path)
+    new_df = _add_time_features(pd.read_csv(new_data_path))
     new_df = new_df.dropna(subset=feature_cols)
 
     X_new = scaler.transform(new_df[feature_cols].values)
@@ -59,7 +71,7 @@ def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
     y_pred = rf.predict(X_new)
 
     report = {
-        'timestamp': datetime.utcnow().isoformat(),
+        'timestamp': now.isoformat(),
         'n_samples': int(len(X_new)),
         'drift_detected': len(drifted) > 0,
         'drifted_features': drifted,
@@ -78,8 +90,8 @@ def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
         json.dump(report, f, indent=2)
 
     if report['drift_detected']:
-        alert = {'timestamp': report['timestamp'], 'drifted_features': drifted}
-        alert_path = f"monitoring/alerts/alert_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+        alert = {'timestamp': now.isoformat(), 'drifted_features': drifted}
+        alert_path = f"monitoring/alerts/alert_{now.strftime('%Y%m%d_%H%M%S')}.json"
         with open(alert_path, 'w') as f:
             json.dump(alert, f, indent=2)
         log.warning("Drift detected in features: %s", drifted)

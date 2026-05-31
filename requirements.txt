@@ -1,4 +1,3 @@
-tensorflow
 numpy
 matplotlib
 pandas
@@ -8,6 +7,5 @@ scipy
 dvc
 dvc-gdrive
 dvclive
-keras
 joblib
 pyyaml

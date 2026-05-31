@@ -20,9 +20,12 @@ stages:
       - artifacts/preprocessing/scaler.pkl
       - artifacts/preprocessing/feature_columns.json
       - test/test.csv
+      - val/val.csv
     outs:
       - artifacts/data/X_test.npy
       - artifacts/data/y_test.npy
+      - artifacts/data/X_val.npy
+      - artifacts/data/y_val.npy
     metrics:
       - artifacts/metrics/evaluation_metrics.json:
           cache: false
@@ -43,6 +46,20 @@ stages:
           cache: false
     metrics:
       - artifacts/metrics/monitoring_metrics.json:
+          cache: false
+
+  generate_reports:
+    cmd: python3 src/generate_reports.py
+    deps:
+      - src/generate_reports.py
+      - artifacts/metrics/training_history.json
+      - artifacts/metrics/evaluation_metrics.json
+      - artifacts/metrics/monitoring_metrics.json
+      - monitoring/reports/drift_report.json
+    outs:
+      - reports/performance_report.html:
+          cache: false
+      - reports/monitoring_dashboard.html:
           cache: false
 
 metrics:

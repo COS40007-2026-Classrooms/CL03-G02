@@ -1,4 +1,7 @@
+import shutil
 import pandas as pd
+
+shutil.copy('train/train.csv', 'train/train_pre_merge.csv')
 
 new = pd.read_csv('data/new_data.csv')
 train = pd.read_csv('train/train.csv')

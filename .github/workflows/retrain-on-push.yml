@@ -86,7 +86,7 @@ jobs:
         run: |
           git config --local user.email "github-actions@github.com"
           git config --local user.name "GitHub Actions [Bot]"
-          git add artifacts/metrics/ monitoring/ dvc.lock || true
+          git add artifacts/metrics/ monitoring/ dvc.lock train/train.csv.dvc || true
           git diff --staged --quiet || git commit -m "update metrics and monitoring reports [skip ci]"
           git push || echo "Nothing to push"
 

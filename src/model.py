@@ -25,11 +25,24 @@ log = logging.getLogger(__name__)
 FEATURE_COLS = [
     'Temperature', 'Humidity', 'Wind Speed',
     'general diffuse flows', 'diffuse flows',
+    'hour', 'month', 'day_of_week', 'is_weekend',
 ]
 TARGET_COL = 'Zone 1 Power Consumption'
 
+
+def _add_time_features(df):
+    dt = pd.to_datetime(df['DateTime'], dayfirst=False)
+    df = df.copy()
+    df['hour'] = dt.dt.hour
+    df['month'] = dt.dt.month
+    df['day_of_week'] = dt.dt.dayofweek
+    df['is_weekend'] = (dt.dt.dayofweek >= 5).astype(int)
+    return df
+
+
 log.info("Loading training data from train/train.csv")
 train_df = pd.read_csv('train/train.csv')
+train_df = _add_time_features(train_df)
 
 X_train = train_df[FEATURE_COLS].values
 y_train = train_df[TARGET_COL].values
