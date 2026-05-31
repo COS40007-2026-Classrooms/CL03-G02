@@ -5,72 +5,84 @@ stages:
     deps:
     - path: src/model.py
       hash: md5
-      md5: 205fadd33bbf014df07e54fcbcd85664
-      size: 2477
+      md5: b5bfb10e2691913ecb03ce0006fd8d66
+      size: 2843
     - path: train/train.csv
       hash: md5
-      md5: e282b7d55438145eb5a4273351007ca1
-      size: 3170527
+      md5: 2a5c300ca117fb0e86dbb74ba3c2bf50
+      size: 3251346
     outs:
     - path: artifacts/data/X_train.npy
       hash: md5
-      md5: 7b484ad296362e380a78c9bc624902ea
-      size: 1587648
+      md5: ed16516911f3ab32ef475c03e90b899c
+      size: 2929592
     - path: artifacts/data/y_train.npy
       hash: md5
-      md5: 20af686729ee3a00f87d20b25b6cbbff
-      size: 317632
+      md5: e5e4e647324247832342e882f9262bd1
+      size: 325624
     - path: artifacts/metrics/training_history.json
       hash: md5
-      md5: 2b5418e8c3c6089bd36efc8c8766be4e
+      md5: f588f9b27f6cabfa44f8873d5c1f150d
       size: 271
     - path: artifacts/models/
       hash: md5
-      md5: d84506c45038547c8ceaf582ac589d55.dir
-      size: 346483410
+      md5: a85cf9ddc60ed39914f7fa78e9cb513d.dir
+      size: 345650226
       nfiles: 2
     - path: artifacts/preprocessing/
       hash: md5
-      md5: cedc54828e189c2b204aa55138f0677b.dir
-      size: 782
+      md5: f1ad486cfd6cdc2d5fd18705d46b32c5.dir
+      size: 932
       nfiles: 2
   evaluate:
     cmd: python3 src/evaluate.py
     deps:
     - path: artifacts/models/decision_tree.pkl
       hash: md5
-      md5: 418baa1d32efab751a4d7f01dd37ca31
-      size: 128993
+      md5: 78a8dcb2bc81a158e8cd58032abf17ab
+      size: 134897
     - path: artifacts/models/random_forest.pkl
       hash: md5
-      md5: a913005e2ed474e7a92f70ffc585622b
-      size: 346354417
+      md5: 403bbb19bd242cf9f7891bc322e81014
+      size: 345515329
     - path: artifacts/preprocessing/feature_columns.json
       hash: md5
-      md5: 855eedeab74b2fa344181d683137ad5c
-      size: 95
+      md5: 235bbf8f085b3896d709a1a428421ad1
+      size: 149
     - path: artifacts/preprocessing/scaler.pkl
       hash: md5
-      md5: 32d85dec9ecf87cb2075535468b24909
-      size: 687
+      md5: 97b92608f05c66620db11c55314b9ad9
+      size: 783
     - path: src/evaluate.py
       hash: md5
-      md5: 31cc3af8dd9effcbdd4108ca42f6ce3d
-      size: 1702
+      md5: 66b26ebd27901f97088b86148e7105dc
+      size: 2690
     - path: test/test.csv
       hash: md5
       md5: 47d7e6b5f10f14c1e25094e59ec4eaf1
       size: 844851
+    - path: val/val.csv
+      hash: md5
+      md5: 2b5ddf5245d8e8bee42010fa07d0fc0e
+      size: 423906
     outs:
     - path: artifacts/data/X_test.npy
       hash: md5
-      md5: 548db7e776879e57f663b8793f4c6633
-      size: 419448
+      md5: 99cd6fd9bceae4f9bddd2381f6bcf62e
+      size: 754904
+    - path: artifacts/data/X_val.npy
+      hash: md5
+      md5: 36e3552a92337d252ba2b08c088ca2c7
+      size: 377552
     - path: artifacts/data/y_test.npy
       hash: md5
       md5: 13eae2b795a92dc2dddb949651202dda
       size: 83992
+    - path: artifacts/data/y_val.npy
+      hash: md5
+      md5: a838ca0f5cd0715f3d0b0acd19e41edd
+      size: 42064
     - path: artifacts/metrics/evaluation_metrics.json
       hash: md5
-      md5: 3a74373bc7d9ef24a4cac9035ee917c4
-      size: 237
+      md5: 7a6711e8a0b00ef700c72132a85d9da9
+      size: 442

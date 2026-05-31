@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-31T14:34:13.365310",
+  "timestamp": "2026-05-31T16:01:56.688710",
   "n_samples": 999,
   "drift_detected": true,
   "drifted_features": [
@@ -7,35 +7,56 @@
     "Humidity",
     "Wind Speed",
     "general diffuse flows",
-    "diffuse flows"
+    "diffuse flows",
+    "month"
   ],
   "drift_detail": {
     "Temperature": {
-      "ks_statistic": 0.39635031625053807,
-      "p_value": 1.7159530338141776e-138,
+      "ks_statistic": 0.38661860917126734,
+      "p_value": 1.121611767541086e-131,
       "drift": true
     },
     "Humidity": {
-      "ks_statistic": 0.09880044830155699,
-      "p_value": 9.952157383881157e-09,
+      "ks_statistic": 0.09637457153862883,
+      "p_value": 2.4701123283583372e-08,
       "drift": true
     },
     "Wind Speed": {
-      "ks_statistic": 0.14992416322793267,
-      "p_value": 1.4115272977893141e-19,
+      "ks_statistic": 0.14624303070244038,
+      "p_value": 1.1571466595668017e-18,
       "drift": true
     },
     "general diffuse flows": {
-      "ks_statistic": 0.20010730847759672,
-      "p_value": 1.1632080246580594e-34,
+      "ks_statistic": 0.19519401427627642,
+      "p_value": 5.081108195913917e-33,
       "drift": true
     },
     "diffuse flows": {
-      "ks_statistic": 0.22673348615698952,
-      "p_value": 1.7460239326184956e-44,
+      "ks_statistic": 0.2211664315038857,
+      "p_value": 2.2844288906101528e-42,
       "drift": true
+    },
+    "hour": {
+      "ks_statistic": 0.003705723567104302,
+      "p_value": 1.0,
+      "drift": false
+    },
+    "month": {
+      "ks_statistic": 0.9017868115122767,
+      "p_value": 0.0,
+      "drift": true
+    },
+    "day_of_week": {
+      "ks_statistic": 0.003936667023156537,
+      "p_value": 1.0,
+      "drift": false
+    },
+    "is_weekend": {
+      "ks_statistic": 0.0016119543241228662,
+      "p_value": 1.0,
+      "drift": false
     }
   },
-  "mae": 123.63000355105089,
-  "r2": 0.9987381500811968
+  "mae": 10.966237964569688,
+  "r2": 0.9999850007165022
 }
