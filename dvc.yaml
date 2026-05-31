@@ -1,54 +1,49 @@
 stages:
   train:
-    cmd: python src/model.py
+    cmd: python3 src/model.py
     deps:
       - src/model.py
       - train/train.csv
-      - test/test.csv
-      - val/val.csv
-      - params.yaml
     outs:
-      - models/model.keras
-      - artifacts/
-    metrics:
-      - metrics.json:
-          cache: false
-    params:
-      - params.yaml
+      - artifacts/models/
+      - artifacts/preprocessing/
+      - artifacts/data/X_train.npy
+      - artifacts/data/y_train.npy
+      - artifacts/metrics/training_history.json
 
   evaluate:
-    cmd: python src/evaluate.py
+    cmd: python3 src/evaluate.py
     deps:
       - src/evaluate.py
-      - models/model.keras
-      - artifacts/X_test_cnn.npy
-      - artifacts/y_test.npy
-      - artifacts/training_history.json
-      - artifacts/feature_columns.json
+      - artifacts/models/random_forest.pkl
+      - artifacts/models/decision_tree.pkl
+      - artifacts/preprocessing/scaler.pkl
+      - artifacts/preprocessing/feature_columns.json
       - test/test.csv
-      - params.yaml
+    outs:
+      - artifacts/data/X_test.npy
+      - artifacts/data/y_test.npy
     metrics:
-      - metrics.json:
+      - artifacts/metrics/evaluation_metrics.json:
           cache: false
 
   monitor:
-    cmd: python src/monitor.py
+    cmd: python3 src/monitor.py
     deps:
       - src/monitor.py
-      - models/model.keras
-      - artifacts/data/
+      - artifacts/models/random_forest.pkl
+      - artifacts/preprocessing/scaler.pkl
+      - artifacts/preprocessing/feature_columns.json
+      - artifacts/data/X_train.npy
+      - data/new_data.csv
     outs:
-      - retrain_needed.txt:
+      - artifacts/data/X_new.npy:
           cache: false
-      - drift_status.txt:
+      - monitoring/reports/drift_report.json:
           cache: false
-
-params:
-  - params.yaml
+    metrics:
+      - artifacts/metrics/monitoring_metrics.json:
+          cache: false
 
 metrics:
-  - metrics.json
-
-plots:
-  - dvclive/plots/metrics:
-      x: step
+  - artifacts/metrics/evaluation_metrics.json

@@ -1,0 +1,76 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python3 src/model.py
+    deps:
+    - path: src/model.py
+      hash: md5
+      md5: 3f90175a99ad573a0e14e6fd064d3051
+      size: 2828
+    - path: train/train.csv
+      hash: md5
+      md5: be7ef7d3a97c0a28fe64f2f7c615dc0f
+      size: 2928070
+    outs:
+    - path: artifacts/data/X_train.npy
+      hash: md5
+      md5: 6613875d45db26d44cb0d89dd19fbb1b
+      size: 1467768
+    - path: artifacts/data/y_train.npy
+      hash: md5
+      md5: 9de277930b8de36e0d0282202e1ce731
+      size: 293656
+    - path: artifacts/metrics/training_history.json
+      hash: md5
+      md5: 677b9490a9d19d902ab111d090165110
+      size: 272
+    - path: artifacts/models/
+      hash: md5
+      md5: 5f1a1a2f456f9b42af7adf1f298a1cfe.dir
+      size: 332842578
+      nfiles: 2
+    - path: artifacts/preprocessing/
+      hash: md5
+      md5: e5cbd946f58771b48bd281ac216e87bd.dir
+      size: 814
+      nfiles: 2
+  evaluate:
+    cmd: python3 src/evaluate.py
+    deps:
+    - path: artifacts/models/decision_tree.pkl
+      hash: md5
+      md5: 8cae9d5a7f8fdb39a387f15261f29ac8
+      size: 128129
+    - path: artifacts/models/random_forest.pkl
+      hash: md5
+      md5: efee34e536604de2239741977272697b
+      size: 332714449
+    - path: artifacts/preprocessing/feature_columns.json
+      hash: md5
+      md5: 855eedeab74b2fa344181d683137ad5c
+      size: 95
+    - path: artifacts/preprocessing/scaler.pkl
+      hash: md5
+      md5: 3d4e6d6508f0541ebdde5a3198577469
+      size: 719
+    - path: src/evaluate.py
+      hash: md5
+      md5: f1b038d0e12e6ef4c0900cb622e1ceb9
+      size: 1935
+    - path: test/test.csv
+      hash: md5
+      md5: 47d7e6b5f10f14c1e25094e59ec4eaf1
+      size: 844851
+    outs:
+    - path: artifacts/data/X_test.npy
+      hash: md5
+      md5: 706a27cea5c3b05d6fd8fbf272aafd78
+      size: 419448
+    - path: artifacts/data/y_test.npy
+      hash: md5
+      md5: 13eae2b795a92dc2dddb949651202dda
+      size: 83992
+    - path: artifacts/metrics/evaluation_metrics.json
+      hash: md5
+      md5: 940c72be79277f6b76e4f030c821a437
+      size: 238

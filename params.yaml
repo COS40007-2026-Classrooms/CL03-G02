@@ -1,0 +1,30 @@
+data:
+  test_size: 0.2
+  random_seed: 42
+  target_column: 'Zone 1 Power Consumption'
+  datetime_column: 'DateTime'
+
+model:
+  epochs: 50
+  batch_size: 64
+  learning_rate: 0.0001
+  cnn_filters: [64, 128, 64]
+  kernel_size: 3
+  pool_size: 2
+  dense_units_1: 256
+  dense_units_2: 128
+  dense_units_3: 64
+  dropout_1: 0.3
+  dropout_2: 0.2
+
+callbacks:
+  early_stopping_patience: 10
+  reduce_lr_patience: 5
+  reduce_lr_factor: 0.5
+  reduce_lr_min_lr: 0.000001
+
+evaluate:
+  metrics_path: metrics.json
+
+monitor:
+  degradation_threshold: 0.15
