@@ -1,9 +1,0 @@
-2026-05-31 22:27:19,791 INFO Loading training data from train/train.csv
-2026-05-31 22:27:19,823 INFO Training Random Forest and Decision Tree models
-2026-05-31 22:27:22,546 INFO random_forest train MAE=1083.34 R2=0.9491
-2026-05-31 22:27:22,548 INFO decision_tree train MAE=3686.18 R2=0.4998
-2026-05-31 22:27:22,856 INFO Training complete. Models saved to artifacts/models/
-2026-05-31 22:27:24,993 INFO Loading test data from test/test.csv
-2026-05-31 22:27:25,085 INFO random_forest test MAE=5116.69 R2=-0.0577
-2026-05-31 22:27:25,086 INFO decision_tree test MAE=5155.10 R2=-0.0586
-2026-05-31 22:27:25,086 INFO Evaluation complete. Metrics saved to artifacts/metrics/evaluation_metrics.json

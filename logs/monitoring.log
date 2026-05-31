@@ -1,2 +1,0 @@
-2026-05-31 23:45:32,606 INFO Loading new data from data/new_data.csv
-2026-05-31 23:45:32,718 WARNING Drift detected in features: ['Temperature', 'Humidity', 'Wind Speed', 'general diffuse flows', 'diffuse flows']
