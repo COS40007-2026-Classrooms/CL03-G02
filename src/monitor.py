@@ -8,7 +8,6 @@ from datetime import datetime
 from scipy import stats
 from sklearn.metrics import mean_absolute_error, r2_score
 
-# Create output directories if they don't already exist
 os.makedirs('artifacts/metrics', exist_ok=True)
 os.makedirs('artifacts/data', exist_ok=True)
 os.makedirs('monitoring/reports', exist_ok=True)
@@ -23,13 +22,11 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# Features flagged as drifted when KS test p-value falls below this threshold
 DRIFT_P_THRESHOLD = 0.05
 TARGET_COL = 'Zone 1 Power Consumption'
 
 
 def detect_drift(reference: np.ndarray, current: np.ndarray, feature_names: list) -> dict:
-    """Compare new data distribution against training data using the KS test."""
     results = {}
     for i, name in enumerate(feature_names):
         stat, p_value = stats.ks_2samp(reference[:, i], current[:, i])
@@ -42,13 +39,11 @@ def detect_drift(reference: np.ndarray, current: np.ndarray, feature_names: list
 
 
 def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
-    """Run drift detection and performance monitoring on new incoming data."""
     with open('artifacts/preprocessing/feature_columns.json') as f:
         feature_cols = json.load(f)
 
     scaler = joblib.load('artifacts/preprocessing/scaler.pkl')
     rf = joblib.load('artifacts/models/random_forest.pkl')
-    # Load training data to use as the drift reference distribution
     X_train = np.load('artifacts/data/X_train.npy')
 
     log.info("Loading new data from %s", new_data_path)
@@ -71,13 +66,11 @@ def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
         'drift_detail': drift_detail,
     }
 
-    # Only compute performance metrics if ground truth labels are available
     if TARGET_COL in new_df.columns:
         y_true = new_df[TARGET_COL].values
         report['mae'] = float(mean_absolute_error(y_true, y_pred))
         report['r2'] = float(r2_score(y_true, y_pred))
 
-    # Save summary metrics separately from the full drift detail
     with open('artifacts/metrics/monitoring_metrics.json', 'w') as f:
         json.dump({k: v for k, v in report.items() if k != 'drift_detail'}, f, indent=2)
 
@@ -85,7 +78,6 @@ def run_monitoring(new_data_path: str = 'data/new_data.csv') -> dict:
         json.dump(report, f, indent=2)
 
     if report['drift_detected']:
-        # Write a timestamped alert file so each drift event is preserved
         alert = {'timestamp': report['timestamp'], 'drifted_features': drifted}
         alert_path = f"monitoring/alerts/alert_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
         with open(alert_path, 'w') as f:

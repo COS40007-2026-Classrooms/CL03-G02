@@ -5,7 +5,6 @@ import joblib
 import numpy as np
 import pandas as pd
 
-# Create output directories if they don't already exist
 os.makedirs('artifacts/data', exist_ok=True)
 os.makedirs('logs', exist_ok=True)
 
@@ -21,7 +20,6 @@ def preprocess(
     input_path: str = 'data/new_data.csv',
     output_path: str = 'artifacts/data/X_new.npy',
 ) -> np.ndarray:
-    """Scale new incoming data using the scaler fitted during training."""
     with open('artifacts/preprocessing/feature_columns.json') as f:
         feature_cols = json.load(f)
 
@@ -30,7 +28,6 @@ def preprocess(
     log.info("Loading new data from %s", input_path)
     df = pd.read_csv(input_path)
 
-    # DateTime is not a feature — drop it if present
     if 'DateTime' in df.columns:
         df = df.drop(columns=['DateTime'])
 

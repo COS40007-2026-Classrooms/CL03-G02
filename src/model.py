@@ -9,7 +9,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# Create output directories if they don't already exist
 os.makedirs('artifacts/models', exist_ok=True)
 os.makedirs('artifacts/preprocessing', exist_ok=True)
 os.makedirs('artifacts/metrics', exist_ok=True)
@@ -23,7 +22,6 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# Input features used for training and the target variable to predict
 FEATURE_COLS = [
     'Temperature', 'Humidity', 'Wind Speed',
     'general diffuse flows', 'diffuse flows',
@@ -36,7 +34,6 @@ train_df = pd.read_csv('train/train.csv')
 X_train = train_df[FEATURE_COLS].values
 y_train = train_df[TARGET_COL].values
 
-# Fit scaler on training data and save it so evaluate.py uses the same transformation
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 
@@ -44,7 +41,6 @@ joblib.dump(scaler, 'artifacts/preprocessing/scaler.pkl')
 with open('artifacts/preprocessing/feature_columns.json', 'w') as f:
     json.dump(FEATURE_COLS, f, indent=2)
 
-# Save scaled arrays so monitor.py can compare against them for drift detection
 np.save('artifacts/data/X_train.npy', X_train_scaled)
 np.save('artifacts/data/y_train.npy', y_train)
 
@@ -56,7 +52,6 @@ rf.fit(X_train_scaled, y_train)
 dt = DecisionTreeRegressor(max_depth=10, random_state=42)
 dt.fit(X_train_scaled, y_train)
 
-# Evaluate both models on training data and record metrics
 metrics = {}
 for name, model in [('random_forest', rf), ('decision_tree', dt)]:
     y_pred = model.predict(X_train_scaled)

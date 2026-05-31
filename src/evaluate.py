@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# Create output directories if they don't already exist
 os.makedirs('artifacts/metrics', exist_ok=True)
 os.makedirs('artifacts/data', exist_ok=True)
 os.makedirs('logs', exist_ok=True)
@@ -20,7 +19,6 @@ log = logging.getLogger(__name__)
 
 TARGET_COL = 'Zone 1 Power Consumption'
 
-# Load the feature list and scaler saved during training
 with open('artifacts/preprocessing/feature_columns.json') as f:
     feature_cols = json.load(f)
 
@@ -31,14 +29,12 @@ dt = joblib.load('artifacts/models/decision_tree.pkl')
 log.info("Loading test data from test/test.csv")
 test_df = pd.read_csv('test/test.csv')
 
-# Apply the same scaler fitted on training data — never refit on test data
 X_test = scaler.transform(test_df[feature_cols].values)
 y_test = test_df[TARGET_COL].values
 
 np.save('artifacts/data/X_test.npy', X_test)
 np.save('artifacts/data/y_test.npy', y_test)
 
-# Evaluate both models on unseen test data
 metrics = {}
 for name, model in [('random_forest', rf), ('decision_tree', dt)]:
     y_pred = model.predict(X_test)
