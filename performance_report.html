@@ -2,29 +2,107 @@
 <html>
 <head>
   <title>Performance Report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    table { border-collapse: collapse; margin-bottom: 20px; }
+    body { font-family: sans-serif; padding: 20px; max-width: 1100px; margin: auto; }
+    h2 { color: #333; }
+    h3 { color: #555; margin-top: 30px; }
+    table { border-collapse: collapse; margin-bottom: 20px; width: 100%; }
     th, td { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
     th { background: #eee; }
+    .charts { display: flex; gap: 30px; margin: 20px 0 30px; }
+    .chart-box { flex: 1; }
   </style>
 </head>
 <body>
   <h2>Model Performance Report</h2>
   <p>Dataset: Tetuan City Power Consumption &nbsp;|&nbsp; Target: Zone 1 Power Consumption</p>
 
+  <div class="charts">
+    <div class="chart-box">
+      <h3>MAE by Split</h3>
+      <canvas id="maeChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>R&sup2; by Split</h3>
+      <canvas id="r2Chart"></canvas>
+    </div>
+  </div>
+
   <h3>Training Metrics</h3>
   <table>
-    <tr><th>Model</th><th>MAE</th><th>MSE</th><th>R2</th></tr>
-    <tr><td>Random Forest</td><td>252.7252</td><td>172642.1892</td><td>0.9967</td></tr>
-    <tr><td>Decision Tree</td><td>1003.4761</td><td>2115758.5140</td><td>0.9591</td></tr>
+    <tr><th>Model</th><th>MAE</th><th>MSE</th><th>R&sup2;</th></tr>
+    <tr><td>Random Forest</td><td>246.9247</td><td>167897.5792</td><td>0.9967</td></tr>
+    <tr><td>Decision Tree</td><td>991.0217</td><td>2081067.4825</td><td>0.9597</td></tr>
   </table>
 
-  <h3>Test Metrics</h3>
+  <h3>Test &amp; Validation Metrics</h3>
   <table>
-    <tr><th>Model</th><th>MAE</th><th>MSE</th><th>R2</th></tr>
-    <tr><td>Random Forest</td><td>2659.2904</td><td>12198509.6504</td><td>0.7243</td></tr>
-    <tr><td>Decision Tree</td><td>3051.4583</td><td>17576053.3650</td><td>0.6028</td></tr>
+    <tr><th>Model</th><th>Test MAE</th><th>Test R&sup2;</th><th>Val MAE</th><th>Val R&sup2;</th></tr>
+    <tr><td>Random Forest</td><td>2875.5638</td><td>0.6903</td><td>1276.6334</td><td>0.8803</td></tr>
+    <tr><td>Decision Tree</td><td>3090.1953</td><td>0.6205</td><td>1741.9524</td><td>0.8115</td></tr>
   </table>
+
+  <script>
+    new Chart(document.getElementById('maeChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Train', 'Test', 'Val'],
+        datasets: [
+          {
+            label: 'Random Forest',
+            data: [246.92, 2875.56, 1276.63],
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Decision Tree',
+            data: [991.02, 3090.2, 1741.95],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: 'MAE (Wh)' } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('r2Chart'), {
+      type: 'bar',
+      data: {
+        labels: ['Train', 'Test', 'Val'],
+        datasets: [
+          {
+            label: 'Random Forest',
+            data: [0.9967, 0.6903, 0.8803],
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Decision Tree',
+            data: [0.9597, 0.6205, 0.8115],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { min: 0.57, max: 1, title: { display: true, text: 'R²' } }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
