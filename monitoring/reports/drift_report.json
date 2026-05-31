@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-31T14:16:11.578268",
+  "timestamp": "2026-05-31T14:31:06.956151",
   "n_samples": 999,
   "drift_detected": true,
   "drifted_features": [
@@ -11,31 +11,31 @@
   ],
   "drift_detail": {
     "Temperature": {
-      "ks_statistic": 0.41736140491778595,
-      "p_value": 4.9288373610194704e-154,
+      "ks_statistic": 0.4065845938471233,
+      "p_value": 5.094416287379977e-146,
       "drift": true
     },
     "Humidity": {
-      "ks_statistic": 0.1040379992621967,
-      "p_value": 1.2679307083187302e-09,
+      "ks_statistic": 0.10135160361322837,
+      "p_value": 3.6588624401453464e-09,
       "drift": true
     },
     "Wind Speed": {
-      "ks_statistic": 0.15787185434306683,
-      "p_value": 1.1962253892854314e-21,
+      "ks_statistic": 0.15379539895552197,
+      "p_value": 1.3921302491626846e-20,
       "drift": true
     },
     "general diffuse flows": {
-      "ks_statistic": 0.21071527882353036,
-      "p_value": 2.2069641002209826e-38,
+      "ks_statistic": 0.20527433789601335,
+      "p_value": 1.815514348149258e-36,
       "drift": true
     },
     "diffuse flows": {
-      "ks_statistic": 0.23875294769431143,
-      "p_value": 2.736161869122836e-49,
+      "ks_statistic": 0.23258803790737925,
+      "p_value": 8.1302354335460525e-47,
       "drift": true
     }
   },
-  "mae": 996.2407108961945,
-  "r2": 0.9401565507806826
+  "mae": 318.93478967597514,
+  "r2": 0.9925849169879684
 }
