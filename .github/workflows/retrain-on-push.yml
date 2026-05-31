@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
 
       - name: Configure git identity
         run: |
@@ -58,7 +59,7 @@ jobs:
           dvc remote modify origin --local password $DAGSHUB_TOKEN
 
       - name: Pull artefacts from DVC remote
-        run: dvc pull || echo "No existing artefacts to pull"
+        run: dvc pull --allow-missing || echo "No existing artefacts to pull"
 
       - name: Merge new data into training set
         run: |
@@ -85,17 +86,14 @@ jobs:
           fi
 
       - name: Push artefacts to DVC remote
-        env:
-          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: dvc push
 
       - name: Commit updated metrics and reports
         run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
           git add artifacts/metrics/ monitoring/ dvc.lock train/train.csv.dvc || true
           git diff --staged --quiet || git commit -m "update metrics and monitoring reports [skip ci]"
-          git push origin main || echo "Nothing to push to origin"
-          git push --force https://${{ secrets.DAGSHUB_USERNAME }}:${{ secrets.DAGSHUB_TOKEN }}@dagshub.com/kaibroomfield314/CL03_G02.git main || echo "Nothing to push to DagHub"
+          git push || echo "Nothing to push"
 
       - name: Generate HTML reports
         run: python3 src/generate_reports.py
