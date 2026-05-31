@@ -4,6 +4,7 @@ matplotlib
 pandas
 seaborn
 scikit-learn
+scipy
 dvc
 dvc-gdrive
 dvclive
