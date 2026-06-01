@@ -32,15 +32,15 @@
   <h3>Training Metrics</h3>
   <table>
     <tr><th>Model</th><th>MAE</th><th>MSE</th><th>R&sup2;</th></tr>
-    <tr><td>Random Forest</td><td>246.9247</td><td>167897.5792</td><td>0.9967</td></tr>
-    <tr><td>Decision Tree</td><td>991.0217</td><td>2081067.4825</td><td>0.9597</td></tr>
+    <tr><td>Random Forest</td><td>241.4403</td><td>163856.6177</td><td>0.9968</td></tr>
+    <tr><td>Decision Tree</td><td>977.4033</td><td>2060362.5070</td><td>0.9600</td></tr>
   </table>
 
   <h3>Test &amp; Validation Metrics</h3>
   <table>
     <tr><th>Model</th><th>Test MAE</th><th>Test R&sup2;</th><th>Val MAE</th><th>Val R&sup2;</th></tr>
-    <tr><td>Random Forest</td><td>2875.5638</td><td>0.6903</td><td>1276.6334</td><td>0.8803</td></tr>
-    <tr><td>Decision Tree</td><td>3090.1953</td><td>0.6205</td><td>1741.9524</td><td>0.8115</td></tr>
+    <tr><td>Random Forest</td><td>2638.8264</td><td>0.7297</td><td>1291.4504</td><td>0.8797</td></tr>
+    <tr><td>Decision Tree</td><td>2980.5804</td><td>0.6264</td><td>1811.4505</td><td>0.8002</td></tr>
   </table>
 
   <script>
@@ -51,14 +51,14 @@
         datasets: [
           {
             label: 'Random Forest',
-            data: [246.92, 2875.56, 1276.63],
+            data: [241.44, 2638.83, 1291.45],
             backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
           },
           {
             label: 'Decision Tree',
-            data: [991.02, 3090.2, 1741.95],
+            data: [977.4, 2980.58, 1811.45],
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -81,14 +81,14 @@
         datasets: [
           {
             label: 'Random Forest',
-            data: [0.9967, 0.6903, 0.8803],
+            data: [0.9968, 0.7297, 0.8797],
             backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
           },
           {
             label: 'Decision Tree',
-            data: [0.9597, 0.6205, 0.8115],
+            data: [0.96, 0.6264, 0.8002],
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -99,7 +99,7 @@
         responsive: true,
         plugins: { legend: { position: 'top' } },
         scales: {
-          y: { min: 0.57, max: 1, title: { display: true, text: 'R²' } }
+          y: { min: 0.58, max: 1, title: { display: true, text: 'R²' } }
         }
       }
     });
