@@ -14,7 +14,6 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 os.makedirs('artifacts/lstm', exist_ok=True)
-os.makedirs('artifacts/preprocessing', exist_ok=True)
 os.makedirs('artifacts/metrics', exist_ok=True)
 os.makedirs('logs', exist_ok=True)
 
