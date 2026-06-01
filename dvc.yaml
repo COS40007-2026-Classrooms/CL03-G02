@@ -48,6 +48,21 @@ stages:
       - artifacts/metrics/monitoring_metrics.json:
           cache: false
 
+  lstm_train:
+    cmd: python3 src/lstm_model.py
+    deps:
+      - src/lstm_model.py
+      - train/train.csv
+    outs:
+      - artifacts/models/lstm_model.keras
+      - artifacts/preprocessing/lstm_scaler.pkl
+      - artifacts/preprocessing/lstm_feature_columns.json
+      - artifacts/preprocessing/lstm_qcut_bins.pkl
+      - artifacts/preprocessing/lstm_label_classes.pkl
+    metrics:
+      - artifacts/metrics/lstm_metrics.json:
+          cache: false
+
   generate_reports:
     cmd: python3 src/generate_reports.py
     deps:
@@ -55,6 +70,7 @@ stages:
       - artifacts/metrics/training_history.json
       - artifacts/metrics/evaluation_metrics.json
       - artifacts/metrics/monitoring_metrics.json
+      - artifacts/metrics/lstm_metrics.json
       - monitoring/reports/drift_report.json
     outs:
       - reports/performance_report.html:
@@ -64,3 +80,4 @@ stages:
 
 metrics:
   - artifacts/metrics/evaluation_metrics.json
+  - artifacts/metrics/lstm_metrics.json

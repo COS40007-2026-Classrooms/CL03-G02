@@ -9,3 +9,4 @@ dvc-gdrive
 dvclive
 joblib
 pyyaml
+tensorflow

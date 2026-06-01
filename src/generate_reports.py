@@ -9,8 +9,13 @@ with open('artifacts/metrics/training_history.json') as f:
 with open('artifacts/metrics/evaluation_metrics.json') as f:
     test = json.load(f)
 
+lstm_metrics = None
 monitoring = None
 drift = None
+
+if os.path.exists('artifacts/metrics/lstm_metrics.json'):
+    with open('artifacts/metrics/lstm_metrics.json') as f:
+        lstm_metrics = json.load(f)
 
 if os.path.exists('artifacts/metrics/monitoring_metrics.json'):
     with open('artifacts/metrics/monitoring_metrics.json') as f:
@@ -88,6 +93,14 @@ with open('reports/performance_report.html', 'w') as f:
     <tr><td>Random Forest</td><td>{fmt(test['random_forest']['mae'])}</td><td>{fmt(test['random_forest']['r2'])}</td><td>{fmt(test['random_forest']['val_mae'])}</td><td>{fmt(test['random_forest']['val_r2'])}</td></tr>
     <tr><td>Decision Tree</td><td>{fmt(test['decision_tree']['mae'])}</td><td>{fmt(test['decision_tree']['r2'])}</td><td>{fmt(test['decision_tree']['val_mae'])}</td><td>{fmt(test['decision_tree']['val_r2'])}</td></tr>
   </table>
+
+  {'<h3>Deep Learning — LSTM Classifier</h3><table><tr><th>Metric</th><th>Value</th></tr>' +
+   f'<tr><td>Test Accuracy</td><td>{fmt(lstm_metrics["lstm"]["test_accuracy"])}</td></tr>' +
+   f'<tr><td>Test Loss</td><td>{fmt(lstm_metrics["lstm"]["test_loss"])}</td></tr>' +
+   f'<tr><td>F1 Score (Weighted)</td><td>{fmt(lstm_metrics["lstm"]["f1_weighted"])}</td></tr>' +
+   f'<tr><td>Sequence Length</td><td>{lstm_metrics["lstm"]["sequence_len"]} steps (60 min)</td></tr>' +
+   f'<tr><td>Epochs Trained</td><td>{lstm_metrics["lstm"]["epochs_trained"]}</td></tr>' +
+   '</table>' if lstm_metrics else ''}
 
   <script>
     new Chart(document.getElementById('maeChart'), {{
