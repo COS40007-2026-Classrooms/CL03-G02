@@ -17,7 +17,7 @@ monitor:
   degradation_threshold: 0.15
 
 lstm:
-  sequence_len: 6
+  sequence_len: 20
   epochs: 10
   batch_size: 32
   classes: 4

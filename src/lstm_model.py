@@ -24,7 +24,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-SEQUENCE_LEN = 6
+SEQUENCE_LEN = 20
 CLASSES_NUM  = 4
 TARGET_COL   = 'Zone 1 Power Consumption'
 LABELS       = ['Low', 'Moderate', 'High', 'Extreme']
