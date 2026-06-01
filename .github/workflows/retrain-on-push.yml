@@ -75,7 +75,7 @@ jobs:
           if [ "${{ github.event.inputs.force_retrain }}" == "true" ]; then
             dvc repro --force
           else
-            dvc repro train evaluate
+            dvc repro train evaluate lstm_train
           fi
           dvc exp save -n "ci-retrain-$(date +%Y%m%d-%H%M%S)"
 
