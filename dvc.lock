@@ -9,29 +9,29 @@ stages:
       size: 2857
     - path: train/train.csv
       hash: md5
-      md5: d6b7cb031843862df257b209fa5d04bc
-      size: 3978717
+      md5: 9dc9ac9157b502df07fe608b7353b9fb
+      size: 4059536
     outs:
     - path: artifacts/data/X_train.npy
       hash: md5
-      md5: e9ebd43b68ff2f21ed60a33f6691954d
-      size: 3576944
+      md5: 0e3f71ce676e72e2a1359759121b13da
+      size: 3648872
     - path: artifacts/data/y_train.npy
       hash: md5
-      md5: d08ce568f1202b8d58ea6c8117b972ff
-      size: 397552
+      md5: 3525951e6195c85fa4cf7917308393e1
+      size: 405544
     - path: artifacts/metrics/training_history.json
       hash: md5
-      md5: 88ad65c865a60b00cb190fc7ad4eb8ba
-      size: 271
+      md5: 3ff5132a99733fc80ba1f47d886caa9c
+      size: 270
     - path: artifacts/models/
       hash: md5
-      md5: fb51b06db46fa6133e30487cdf86f477.dir
-      size: 235620690
+      md5: 2c5b09b6df3092a2199717f8b16f0aa4.dir
+      size: 236326578
       nfiles: 2
     - path: artifacts/preprocessing/
       hash: md5
-      md5: bc7fb078591dbddeb9b05e9081ab9ad7.dir
+      md5: 345a51138c5b957567ed854770b3e909.dir
       size: 932
       nfiles: 2
   evaluate:
@@ -39,19 +39,19 @@ stages:
     deps:
     - path: artifacts/models/decision_tree.pkl
       hash: md5
-      md5: fa619545da537725d223a564f1c0a430
-      size: 133025
+      md5: 19a1c27bcba70bb55a008f62e2268f1d
+      size: 131873
     - path: artifacts/models/random_forest.pkl
       hash: md5
-      md5: c4ab79fba73afd7697b782383fafbfd1
-      size: 235487665
+      md5: 6637083b4ad71b5bbdc52ba7df6c921a
+      size: 236194705
     - path: artifacts/preprocessing/feature_columns.json
       hash: md5
       md5: 235bbf8f085b3896d709a1a428421ad1
       size: 149
     - path: artifacts/preprocessing/scaler.pkl
       hash: md5
-      md5: 5d39cbd24c8be243da22348b33d52906
+      md5: ea7929c0ce5cf42075a9b1b29858d285
       size: 783
     - path: src/evaluate.py
       hash: md5
@@ -68,11 +68,11 @@ stages:
     outs:
     - path: artifacts/data/X_test.npy
       hash: md5
-      md5: 18ed1177cfc5936cfdb66cf6bca5ab22
+      md5: 64100e1dcba760d84e44972ae075b9b5
       size: 754904
     - path: artifacts/data/X_val.npy
       hash: md5
-      md5: 35058493037bd55c25bc1f22b6e83d47
+      md5: 9ba16e99afdede4a8f888a78dee9950e
       size: 377552
     - path: artifacts/data/y_test.npy
       hash: md5
@@ -84,26 +84,26 @@ stages:
       size: 42064
     - path: artifacts/metrics/evaluation_metrics.json
       hash: md5
-      md5: 001b98691fe4a05414073b21b01325ff
-      size: 437
+      md5: c7e89286b283db0aa5e3e992a716884e
+      size: 439
   monitor:
     cmd: python3 src/monitor.py
     deps:
     - path: artifacts/data/X_train.npy
       hash: md5
-      md5: e9ebd43b68ff2f21ed60a33f6691954d
-      size: 3576944
+      md5: 0e3f71ce676e72e2a1359759121b13da
+      size: 3648872
     - path: artifacts/models/random_forest.pkl
       hash: md5
-      md5: c4ab79fba73afd7697b782383fafbfd1
-      size: 235487665
+      md5: 6637083b4ad71b5bbdc52ba7df6c921a
+      size: 236194705
     - path: artifacts/preprocessing/feature_columns.json
       hash: md5
       md5: 235bbf8f085b3896d709a1a428421ad1
       size: 149
     - path: artifacts/preprocessing/scaler.pkl
       hash: md5
-      md5: 5d39cbd24c8be243da22348b33d52906
+      md5: ea7929c0ce5cf42075a9b1b29858d285
       size: 783
     - path: data/new_data.csv
       hash: md5
@@ -116,45 +116,70 @@ stages:
     outs:
     - path: artifacts/data/X_new.npy
       hash: md5
-      md5: 1d9172a8b23d5b184dbdabad67071d29
-      size: 72056
+      md5: 5f37032b7f301fe95959e9b43d4254bb
+      size: 40088
     - path: artifacts/metrics/monitoring_metrics.json
       hash: md5
-      md5: 65eadf79f28bfab82b7d21c8f2f11e5f
+      md5: 57c6d59f833f443ecde3bdf5b9a38fb8
       size: 294
     - path: monitoring/reports/drift_report.json
       hash: md5
-      md5: 51cbbbb434efa35c860d44eba8f6aef9
+      md5: 4241168a4bd880951a0de21f30f479ff
       size: 1429
   generate_reports:
     cmd: python3 src/generate_reports.py
     deps:
     - path: artifacts/metrics/evaluation_metrics.json
       hash: md5
-      md5: 001b98691fe4a05414073b21b01325ff
-      size: 437
+      md5: c7e89286b283db0aa5e3e992a716884e
+      size: 439
+    - path: artifacts/metrics/lstm_metrics.json
+      hash: md5
+      md5: a358ae6236e0a62ec3e8875cc1dd7048
+      size: 147
     - path: artifacts/metrics/monitoring_metrics.json
       hash: md5
-      md5: 65eadf79f28bfab82b7d21c8f2f11e5f
+      md5: 57c6d59f833f443ecde3bdf5b9a38fb8
       size: 294
     - path: artifacts/metrics/training_history.json
       hash: md5
-      md5: 88ad65c865a60b00cb190fc7ad4eb8ba
-      size: 271
+      md5: 3ff5132a99733fc80ba1f47d886caa9c
+      size: 270
     - path: monitoring/reports/drift_report.json
       hash: md5
-      md5: 51cbbbb434efa35c860d44eba8f6aef9
+      md5: 4241168a4bd880951a0de21f30f479ff
       size: 1429
     - path: src/generate_reports.py
       hash: md5
-      md5: 56d0ff618872b39e8e2b447d40757ed3
-      size: 9743
+      md5: 83a625f3048a2b4cd75e583f5c2e8948
+      size: 10521
     outs:
     - path: reports/monitoring_dashboard.html
       hash: md5
-      md5: 01a44cf77b54df5535d6c7f1c344b46c
-      size: 3686
+      md5: a180c827b76b176969d55ab492e6669c
+      size: 1426
     - path: reports/performance_report.html
       hash: md5
-      md5: 48dab1b946930679b8f30f873dec1543
-      size: 3381
+      md5: 1b5eb796404d04905cbd9ce3b4ce46f5
+      size: 1055
+  lstm_train:
+    cmd: python3 src/lstm_model.py
+    deps:
+    - path: src/lstm_model.py
+      hash: md5
+      md5: 145c6a3e78a02b31705b05e5b3c6c569
+      size: 5127
+    - path: train/train.csv
+      hash: md5
+      md5: 9dc9ac9157b502df07fe608b7353b9fb
+      size: 4059536
+    outs:
+    - path: artifacts/lstm/
+      hash: md5
+      md5: 41eb49342a5ae9486976f26b5feef284.dir
+      size: 449016
+      nfiles: 5
+    - path: artifacts/metrics/lstm_metrics.json
+      hash: md5
+      md5: a358ae6236e0a62ec3e8875cc1dd7048
+      size: 147
