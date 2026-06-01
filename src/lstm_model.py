@@ -90,15 +90,15 @@ df['Power_Class'], bins = pd.qcut(df[TARGET_COL], q=4, labels=LABELS, retbins=Tr
 df['Power_Class_Num'] = le.fit_transform(df['Power_Class'])
 
 # Save bins so evaluation can reconstruct the same classes on unseen data
-joblib.dump(bins.tolist(), 'artifacts/preprocessing/lstm_qcut_bins.pkl')
-joblib.dump(le.classes_.tolist(), 'artifacts/preprocessing/lstm_label_classes.pkl')
+joblib.dump(bins.tolist(), 'artifacts/lstm/qcut_bins.pkl')
+joblib.dump(le.classes_.tolist(), 'artifacts/lstm/label_classes.pkl')
 
 mm_scaler = MinMaxScaler()
 X_mm  = mm_scaler.fit_transform(df[FEATURE_COLS])
 y_arr = df['Power_Class_Num'].values
 
-joblib.dump(mm_scaler, 'artifacts/preprocessing/lstm_scaler.pkl')
-with open('artifacts/preprocessing/lstm_feature_columns.json', 'w') as f:
+joblib.dump(mm_scaler, 'artifacts/lstm/scaler.pkl')
+with open('artifacts/lstm/feature_columns.json', 'w') as f:
     json.dump(FEATURE_COLS, f, indent=2)
 
 X_seq, y_seq = create_sequences(X_mm, y_arr, SEQUENCE_LEN)
