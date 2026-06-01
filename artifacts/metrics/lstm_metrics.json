@@ -1,9 +1,9 @@
 {
   "lstm": {
-    "test_accuracy": 0.876,
-    "test_loss": 0.3097,
-    "f1_weighted": 0.8762,
-    "sequence_len": 6,
+    "test_accuracy": 0.8864,
+    "test_loss": 0.2747,
+    "f1_weighted": 0.8864,
+    "sequence_len": 20,
     "epochs_trained": 10
   }
 }
