@@ -98,7 +98,7 @@ with open('reports/performance_report.html', 'w') as f:
    f'<tr><td>Test Accuracy</td><td>{fmt(lstm_metrics["lstm"]["test_accuracy"])}</td></tr>' +
    f'<tr><td>Test Loss</td><td>{fmt(lstm_metrics["lstm"]["test_loss"])}</td></tr>' +
    f'<tr><td>F1 Score (Weighted)</td><td>{fmt(lstm_metrics["lstm"]["f1_weighted"])}</td></tr>' +
-   f'<tr><td>Sequence Length</td><td>{lstm_metrics["lstm"]["sequence_len"]} steps (60 min)</td></tr>' +
+   f'<tr><td>Sequence Length</td><td>{lstm_metrics["lstm"]["sequence_len"]} steps ({lstm_metrics["lstm"]["sequence_len"] * 10} min)</td></tr>' +
    f'<tr><td>Epochs Trained</td><td>{lstm_metrics["lstm"]["epochs_trained"]}</td></tr>' +
    '</table>' if lstm_metrics else ''}
 
