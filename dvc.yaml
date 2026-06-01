@@ -54,7 +54,7 @@ stages:
       - src/lstm_model.py
       - train/train.csv
     outs:
-      - artifacts/models/lstm_model.keras
+      - artifacts/lstm/lstm_model.keras
       - artifacts/preprocessing/lstm_scaler.pkl
       - artifacts/preprocessing/lstm_feature_columns.json
       - artifacts/preprocessing/lstm_qcut_bins.pkl

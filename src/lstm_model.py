@@ -13,7 +13,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-os.makedirs('artifacts/models', exist_ok=True)
+os.makedirs('artifacts/lstm', exist_ok=True)
 os.makedirs('artifacts/preprocessing', exist_ok=True)
 os.makedirs('artifacts/metrics', exist_ok=True)
 os.makedirs('logs', exist_ok=True)
@@ -123,8 +123,8 @@ history = lstm_model.fit(
     verbose=1,
 )
 
-lstm_model.save('artifacts/models/lstm_model.keras')
-log.info("LSTM model saved to artifacts/models/lstm_model.keras")
+lstm_model.save('artifacts/lstm/lstm_model.keras')
+log.info("LSTM model saved to artifacts/lstm/lstm_model.keras")
 
 test_loss, test_acc = lstm_model.evaluate(X_te, y_te, verbose=0)
 y_pred_cls = np.argmax(lstm_model.predict(X_te), axis=1)
