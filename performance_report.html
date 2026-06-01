@@ -32,18 +32,18 @@
   <h3>Training Metrics</h3>
   <table>
     <tr><th>Model</th><th>MAE</th><th>MSE</th><th>R&sup2;</th></tr>
-    <tr><td>Random Forest</td><td>230.2056</td><td>154672.3710</td><td>0.9970</td></tr>
-    <tr><td>Decision Tree</td><td>950.0472</td><td>1993844.2356</td><td>0.9611</td></tr>
+    <tr><td>Random Forest</td><td>225.9421</td><td>151786.7883</td><td>0.9970</td></tr>
+    <tr><td>Decision Tree</td><td>937.0579</td><td>1957496.6766</td><td>0.9617</td></tr>
   </table>
 
   <h3>Test &amp; Validation Metrics</h3>
   <table>
     <tr><th>Model</th><th>Test MAE</th><th>Test R&sup2;</th><th>Val MAE</th><th>Val R&sup2;</th></tr>
-    <tr><td>Random Forest</td><td>2563.1315</td><td>0.7489</td><td>1286.1302</td><td>0.8791</td></tr>
-    <tr><td>Decision Tree</td><td>3017.8200</td><td>0.6148</td><td>1702.9449</td><td>0.8211</td></tr>
+    <tr><td>Random Forest</td><td>2564.8410</td><td>0.7480</td><td>1289.7124</td><td>0.8784</td></tr>
+    <tr><td>Decision Tree</td><td>3010.0384</td><td>0.6175</td><td>1762.0074</td><td>0.8143</td></tr>
   </table>
 
-  <h3>Deep Learning — LSTM Classifier</h3><table><tr><th>Metric</th><th>Value</th></tr><tr><td>Test Accuracy</td><td>0.8864</td></tr><tr><td>Test Loss</td><td>0.2747</td></tr><tr><td>F1 Score (Weighted)</td><td>0.8864</td></tr><tr><td>Sequence Length</td><td>20 steps (60 min)</td></tr><tr><td>Epochs Trained</td><td>10</td></tr></table>
+  <h3>Deep Learning — LSTM Classifier</h3><table><tr><th>Metric</th><th>Value</th></tr><tr><td>Test Accuracy</td><td>0.8918</td></tr><tr><td>Test Loss</td><td>0.2641</td></tr><tr><td>F1 Score (Weighted)</td><td>0.8918</td></tr><tr><td>Sequence Length</td><td>20 steps (200 min)</td></tr><tr><td>Epochs Trained</td><td>10</td></tr></table>
 
   <script>
     new Chart(document.getElementById('maeChart'), {
@@ -53,14 +53,14 @@
         datasets: [
           {
             label: 'Random Forest',
-            data: [230.21, 2563.13, 1286.13],
+            data: [225.94, 2564.84, 1289.71],
             backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
           },
           {
             label: 'Decision Tree',
-            data: [950.05, 3017.82, 1702.94],
+            data: [937.06, 3010.04, 1762.01],
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -83,14 +83,14 @@
         datasets: [
           {
             label: 'Random Forest',
-            data: [0.997, 0.7489, 0.8791],
+            data: [0.997, 0.748, 0.8784],
             backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
           },
           {
             label: 'Decision Tree',
-            data: [0.9611, 0.6148, 0.8211],
+            data: [0.9617, 0.6175, 0.8143],
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -101,7 +101,7 @@
         responsive: true,
         plugins: { legend: { position: 'top' } },
         scales: {
-          y: { min: 0.56, max: 1, title: { display: true, text: 'R²' } }
+          y: { min: 0.57, max: 1, title: { display: true, text: 'R²' } }
         }
       }
     });
