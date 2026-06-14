@@ -20,7 +20,7 @@
 </head>
 <body>
   <h2>Monitoring Dashboard</h2>
-  <p>Timestamp: 2026-06-07T03:41:07.331067 &nbsp;|&nbsp; Samples: 999</p>
+  <p>Timestamp: 2026-06-14T03:47:53.475910 &nbsp;|&nbsp; Samples: 999</p>
 
   <h3>Drift Status</h3>
   <p><span class="status-badge">Drift Detected: YES</span></p>
@@ -34,13 +34,13 @@
   <h3>Feature Drift Detail</h3>
   <table>
     <tr><th>Feature</th><th>KS Statistic</th><th>p-value</th><th>Drift</th></tr>
-    <tr><td>Temperature</td><td>0.2877</td><td>2.17e-72</td><td style='color:red'>Yes</td></tr>
-    <tr><td>Humidity</td><td>0.0717</td><td>7.82e-05</td><td style='color:red'>Yes</td></tr>
-    <tr><td>Wind Speed</td><td>0.1088</td><td>1.42e-10</td><td style='color:red'>Yes</td></tr>
-    <tr><td>general diffuse flows</td><td>0.1453</td><td>1.58e-18</td><td style='color:red'>Yes</td></tr>
-    <tr><td>diffuse flows</td><td>0.1646</td><td>1.08e-23</td><td style='color:red'>Yes</td></tr>
-    <tr><td>hour</td><td>0.0028</td><td>1.00e+00</td><td style='color:green'>No</td></tr>
-    <tr><td>month</td><td>0.6711</td><td>0.00e+00</td><td style='color:red'>Yes</td></tr>
+    <tr><td>Temperature</td><td>0.2826</td><td>8.79e-70</td><td style='color:red'>Yes</td></tr>
+    <tr><td>Humidity</td><td>0.0704</td><td>1.12e-04</td><td style='color:red'>Yes</td></tr>
+    <tr><td>Wind Speed</td><td>0.1069</td><td>3.26e-10</td><td style='color:red'>Yes</td></tr>
+    <tr><td>general diffuse flows</td><td>0.1427</td><td>6.98e-18</td><td style='color:red'>Yes</td></tr>
+    <tr><td>diffuse flows</td><td>0.1616</td><td>7.35e-23</td><td style='color:red'>Yes</td></tr>
+    <tr><td>hour</td><td>0.0027</td><td>1.00e+00</td><td style='color:green'>No</td></tr>
+    <tr><td>month</td><td>0.6591</td><td>0.00e+00</td><td style='color:red'>Yes</td></tr>
     <tr><td>day_of_week</td><td>0.0029</td><td>1.00e+00</td><td style='color:green'>No</td></tr>
     <tr><td>is_weekend</td><td>0.0012</td><td>1.00e+00</td><td style='color:green'>No</td></tr>
   </table>
@@ -48,7 +48,7 @@
   <h3>Performance on New Data</h3>
   <table>
     <tr><th>Metric</th><th>Value</th></tr>
-    <tr><td>MAE</td><td>1.4418</td></tr>
+    <tr><td>MAE</td><td>1.3851</td></tr>
     <tr><td>R&sup2;</td><td>1.0000</td></tr>
   </table>
 
@@ -59,7 +59,7 @@
         labels: ["Temperature", "Humidity", "Wind Speed", "general diffuse flows", "diffuse flows", "hour", "month", "day_of_week", "is_weekend"],
         datasets: [{
           label: 'KS Statistic',
-          data: [0.2877, 0.0717, 0.1088, 0.1453, 0.1646, 0.0028, 0.6711, 0.0029, 0.0012],
+          data: [0.2826, 0.0704, 0.1069, 0.1427, 0.1616, 0.0027, 0.6591, 0.0029, 0.0012],
           backgroundColor: ["rgba(255, 99, 132, 0.7)", "rgba(255, 99, 132, 0.7)", "rgba(255, 99, 132, 0.7)", "rgba(255, 99, 132, 0.7)", "rgba(255, 99, 132, 0.7)", "rgba(75, 192, 192, 0.7)", "rgba(255, 99, 132, 0.7)", "rgba(75, 192, 192, 0.7)", "rgba(75, 192, 192, 0.7)"],
           borderColor: ["rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)", "rgba(75, 192, 192, 1)", "rgba(75, 192, 192, 1)"],
           borderWidth: 1
