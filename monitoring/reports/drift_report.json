@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-07T03:41:07.331067",
+  "timestamp": "2026-06-14T03:47:53.475910",
   "n_samples": 999,
   "drift_detected": true,
   "drifted_features": [
@@ -12,51 +12,51 @@
   ],
   "drift_detail": {
     "Temperature": {
-      "ks_statistic": 0.2877169965312193,
-      "p_value": 2.1744225982186557e-72,
+      "ks_statistic": 0.28255409094969386,
+      "p_value": 8.792907256667368e-70,
       "drift": true
     },
     "Humidity": {
-      "ks_statistic": 0.07172081634796323,
-      "p_value": 7.81955108049894e-05,
+      "ks_statistic": 0.07043383015146198,
+      "p_value": 0.00011214041442618108,
       "drift": true
     },
     "Wind Speed": {
-      "ks_statistic": 0.10883233387943214,
-      "p_value": 1.4205701529483104e-10,
+      "ks_statistic": 0.10687940419223652,
+      "p_value": 3.2642501845001845e-10,
       "drift": true
     },
     "general diffuse flows": {
-      "ks_statistic": 0.1452610769275302,
-      "p_value": 1.57715198326845e-18,
+      "ks_statistic": 0.1426544557202698,
+      "p_value": 6.981740779980496e-18,
       "drift": true
     },
     "diffuse flows": {
-      "ks_statistic": 0.1645894426608856,
-      "p_value": 1.0827979945849378e-23,
+      "ks_statistic": 0.16163598574864557,
+      "p_value": 7.347359041172224e-23,
       "drift": true
     },
     "hour": {
-      "ks_statistic": 0.002757755652237348,
+      "ks_statistic": 0.0027082694132557483,
       "p_value": 1.0,
       "drift": false
     },
     "month": {
-      "ks_statistic": 0.6710990799846359,
+      "ks_statistic": 0.6590566173300761,
       "p_value": 0.0,
       "drift": true
     },
     "day_of_week": {
-      "ks_statistic": 0.0029296210409374135,
+      "ks_statistic": 0.0028770507826406666,
       "p_value": 1.0,
       "drift": false
     },
     "is_weekend": {
-      "ks_statistic": 0.001199597343946479,
+      "ks_statistic": 0.0011780713030893342,
       "p_value": 1.0,
       "drift": false
     }
   },
-  "mae": 1.4417713697616303,
-  "r2": 0.9999983120131397
+  "mae": 1.3850594281774629,
+  "r2": 0.9999983657617623
 }
