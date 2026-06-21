@@ -1,8 +1,8 @@
 {
   "lstm": {
-    "test_accuracy": 0.8906,
-    "test_loss": 0.2616,
-    "f1_weighted": 0.8906,
+    "test_accuracy": 0.9031,
+    "test_loss": 0.2404,
+    "f1_weighted": 0.9032,
     "sequence_len": 20,
     "epochs_trained": 10
   }
